@@ -9,8 +9,8 @@ canvas.height = 500;
 let field = {
     x: 0, 
     y: 0, 
-    width: 100, 
-    height: 100, 
+    width: 500, 
+    height: 500, 
     draw(){
         ctx.fillStyle = 'black';
         ctx.fillRect(this.x, this.y, this.width, this.height);
@@ -49,8 +49,8 @@ function getRandomInt(min, max){
 
 class Rat {
     constructor(){
-        this.x = 50 * getRandomInt(0, 2);
-        this.y = 50 * getRandomInt(0, 2);
+        this.x = 50 * getRandomInt(0, 10);
+        this.y = 50 * getRandomInt(0, 10);
         this.width = 50
         this.height = 50
     }
