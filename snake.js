@@ -28,6 +28,7 @@ let snakeHead = {
         ctx.fillRect(this.x, this.y, this.width, this.height);
     }
 }
+
 class SnakeBody {
     constructor(x, y){
         this.x = x;
@@ -39,12 +40,6 @@ class SnakeBody {
         ctx.fillStyle = 'white';
         ctx.fillRect(this.x, this.y, this.width, this.height);
     }
-}
-
-function getRandomInt(min, max){
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max-min)) + min;
 }
 
 class Rat {
@@ -59,16 +54,15 @@ class Rat {
         ctx.fillRect(this.x, this.y, this.width, this.height);
     }
 }
-let rat = new Rat();
-while(rat.x == snakeHead.x && rat.y == snakeHead.y){
-    rat = new Rat();
-}
-console.log(rat.x, rat.y)
-let snakeBodyArr = [];
 
-field.draw();
-snakeHead.draw();
-rat.draw();
+let snakeBodyArr = [];
+let rat;
+do{
+    rat = new Rat();
+}while(rat.x == snakeHead.x && rat.y == snakeHead.y)
+
+
+allDraw();
 
 document.addEventListener('keydown', (e)=>{
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -116,11 +110,23 @@ document.addEventListener('keydown', (e)=>{
         snakeHead.body += 1;
     }
     
+    allDraw();
+})
+
+function allDraw(){
     field.draw();
     snakeHead.draw();
+    if(snakeBodyArr.length > 0){
+        snakeBodyArr.forEach((a, i, o)=>{
+            a.draw();
+        })
+    }
     rat.draw();
-    
-    snakeBodyArr.forEach((a, i, o)=>{
-        a.draw();
-    })
-})
+
+}
+
+function getRandomInt(min, max){
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max-min)) + min;
+}
